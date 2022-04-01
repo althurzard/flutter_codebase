@@ -1,9 +1,9 @@
 # Update fastlane automatically
 update_fastlane
 
-SLACK_URL = "https://hooks.slack.com/services/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"
-DIAWII_API_TOKEN = "snmwb2vq9w8ku6QfiWOnfwXPUI8uWxorJ5qzA7CktS"
-SLACK_ERROR_URL = "https://hooks.slack.com/services/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"
+SLACK_URL = ""
+DIAWII_API_TOKEN = ""
+SLACK_ERROR_URL = ""
 default_platform(:android)
 
 platform :android do

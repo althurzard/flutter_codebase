@@ -13,9 +13,9 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
-SLACK_URL = "https://hooks.slack.com/services/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"
-SLACK_ERROR_URL = "https://hooks.slack.com/services/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"
-ENV[FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD] = "enbo-oiur-gzab-ixdo"
+SLACK_URL = ""
+SLACK_ERROR_URL = ""
+ENV[FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD] = ""
 
 default_platform(:ios)
 platform :ios do
