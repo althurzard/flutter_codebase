@@ -180,10 +180,10 @@ class S {
     );
   }
 
-  /// `Tìm theo tên...`
+  /// `Tìm kiếm theo tên`
   String get findByName {
     return Intl.message(
-      'Tìm theo tên...',
+      'Tìm kiếm theo tên',
       name: 'findByName',
       desc: '',
       args: [],
@@ -195,6 +195,26 @@ class S {
     return Intl.message(
       'Không có kết nối mạng.',
       name: 'noInternet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Không tìm thấy kết quả`
+  String get noResults {
+    return Intl.message(
+      'Không tìm thấy kết quả',
+      name: 'noResults',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vui lòng tìm kiếm lại với từ khóa khác`
+  String get tryAnotherKeywords {
+    return Intl.message(
+      'Vui lòng tìm kiếm lại với từ khóa khác',
+      name: 'tryAnotherKeywords',
       desc: '',
       args: [],
     );
@@ -290,30 +310,30 @@ class S {
     );
   }
 
-  /// `Trang chủ`
+  /// `Home`
   String get home {
     return Intl.message(
-      'Trang chủ',
+      'Home',
       name: 'home',
       desc: '',
       args: [],
     );
   }
 
-  /// `Hồ sơ`
+  /// `Document`
   String get document {
     return Intl.message(
-      'Hồ sơ',
+      'Document',
       name: 'document',
       desc: '',
       args: [],
     );
   }
 
-  /// `Thông báo`
+  /// `Notification`
   String get notification {
     return Intl.message(
-      'Thông báo',
+      'Notification',
       name: 'notification',
       desc: '',
       args: [],
@@ -350,10 +370,10 @@ class S {
     );
   }
 
-  /// `Tài khoản`
+  /// `Profile`
   String get profile {
     return Intl.message(
-      'Tài khoản',
+      'Profile',
       name: 'profile',
       desc: '',
       args: [],
@@ -525,6 +545,16 @@ class S {
     return Intl.message(
       'Năm sinh không hợp lệ',
       name: 'yearInvalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Số điện thoại không hợp lệ`
+  String get invalidPhone {
+    return Intl.message(
+      'Số điện thoại không hợp lệ',
+      name: 'invalidPhone',
       desc: '',
       args: [],
     );

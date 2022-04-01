@@ -4,6 +4,6 @@ part of 'localization_bloc.dart';
 abstract class LocalizationEvent {}
 
 class SwitchLanguageEvent extends LocalizationEvent {
-  final Language language;
-  SwitchLanguageEvent({required this.language});
+  final Language? language;
+  SwitchLanguageEvent({this.language});
 }

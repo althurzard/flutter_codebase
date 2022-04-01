@@ -13,8 +13,10 @@
    "change_language_title": "Đổi ngôn ngữ của bạn",
    "errorOccur": "Đã xảy ra lỗi...!",
    "fieldNotEmpty": "Không được bỏ trống.",
-   "findByName": "Tìm theo tên...",
+   "findByName": "Tìm kiếm theo tên",
    "noInternet": "Không có kết nối mạng.",
+   "noResults": "Không tìm thấy kết quả",
+   "tryAnotherKeywords": "Vui lòng tìm kiếm lại với từ khóa khác",
    "tryAgain": "Thử lại",
    "cannotInitilizeApp": "Không thể khởi tạo ứng dụng",
    "plsTryAgain": "Vui lòng thử lại",
@@ -48,5 +50,6 @@
    "loadFailed": "Đã xảy ra lỗi!",
    "loadMore": "Đang tải...",
    "noMoreData": "Đã tải xuống hết!",
-   "yearInvalid": "Năm sinh không hợp lệ"
+   "yearInvalid": "Năm sinh không hợp lệ",
+   "invalidPhone": "Số điện thoại không hợp lệ"
 }

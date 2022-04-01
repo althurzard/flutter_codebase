@@ -30,7 +30,7 @@ class DisplayField extends StatelessWidget {
       isRequired: isRequired ?? false,
       enabled: enabled ?? false,
       title: title,
-      icon: iconType(),
+      rightIcon: iconType(),
       child: Container(
         margin: const EdgeInsets.only(right: 40),
         alignment: Alignment.centerLeft,

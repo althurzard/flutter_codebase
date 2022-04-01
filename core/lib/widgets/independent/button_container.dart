@@ -5,21 +5,35 @@ import 'package:core/core.dart';
 import '../../generated_images.dart';
 
 class ButtonContainer extends StatelessWidget {
-  final Widget text;
+  final Widget? text;
+  final String? textString;
   final Widget? icon;
   final double? height;
   final double? width;
   final VoidCallback press;
   final bool isLoading;
   final Color? color;
+  final MainAxisSize mainAxisSize;
+  final bool onlyText;
+  final bool disabled;
+  final BorderRadius? borderRadius;
+  final EdgeInsets? padding;
+  final bool outline;
   const ButtonContainer(
       {Key? key,
-      required this.text,
+      this.text,
+      this.textString,
       this.height,
       this.width,
       this.icon,
       required this.press,
       this.isLoading = false,
+      this.mainAxisSize = MainAxisSize.min,
+      this.onlyText = true,
+      this.disabled = false,
+      this.outline = false,
+      this.padding,
+      this.borderRadius,
       this.color})
       : super(key: key);
 
@@ -27,37 +41,72 @@ class ButtonContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
         height: height ?? AppConsts.buttonHeight,
-        width: width ?? double.infinity,
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: color ?? AppColors.primary,
-            borderRadius: AppConsts.kCardBorder,
-          ),
-          child: ElevatedButton(
-            onPressed: () {
-              if (isLoading) {
-                return;
-              }
-              press();
-            },
-            child: isLoading
-                ? const SpinKitCircle(
-                    color: Colors.white,
-                    size: 30.0,
-                  )
-                : icon == null
-                    ? Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        // Replace with a Row for horizontal icon + text
-                        children: <Widget>[
-                          text,
-                          SvgPicture.asset(Ic.arrowRight),
-                        ],
-                      )
-                    : text,
-          ),
+        child: TextButton(
+          style: TextButton.styleFrom(
+              padding: padding ??
+                  EdgeInsets.only(
+                      left: isLoading || onlyText ? AppConsts.padding : 40,
+                      top: 0,
+                      bottom: 0,
+                      right: AppConsts.padding),
+              textStyle: const TextStyle(fontSize: 20),
+              backgroundColor: outline
+                  ? Colors.white
+                  : (disabled ? AppColors.neutral300 : AppColors.primary),
+              shape: RoundedRectangleBorder(
+                borderRadius: borderRadius ?? BorderRadius.circular(8),
+              ),
+              side:
+                  outline ? const BorderSide(color: AppColors.primary) : null),
+          onPressed: press,
+          child: isLoading
+              ? Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: mainAxisSize,
+                  // Replace with a Row for horizontal icon + text
+                  children: const [
+                    SpinKitCircle(
+                      color: Colors.white,
+                      size: 30.0,
+                    )
+                  ],
+                )
+              : onlyText
+                  ? Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: mainAxisSize,
+                      // Replace with a Row for horizontal icon + text
+                      children: <Widget>[
+                        _text ?? icon ?? SvgPicture.asset(Ic.arrowRight)
+                      ],
+                    )
+                  : Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: mainAxisSize,
+                      // Replace with a Row for horizontal icon + text
+                      children: <Widget>[
+                        _text ?? Container(),
+                        AppConsts.spacingW16,
+                        icon ?? SvgPicture.asset(Ic.arrowRight),
+                      ],
+                    ),
         ));
+  }
+
+  Widget? get _text {
+    return text ??
+        (textString != null
+            ? Text(textString!,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    color: outline
+                        ? AppColors.primary
+                        : (disabled ? AppColors.neutral100 : Colors.white)))
+            : null);
   }
 }
 

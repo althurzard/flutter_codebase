@@ -1,40 +1,76 @@
 {
   "project_info": {
-    "project_number": "993432471673",
-    "project_id": "pnvn-7f907",
-    "storage_bucket": "pnvn-7f907.appspot.com"
+    "project_number": "734707115975",
+    "project_id": "svvn-push-notification",
+    "storage_bucket": "svvn-push-notification.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:993432471673:android:2be64b74556b60e844aca8",
+        "mobilesdk_app_id": "1:734707115975:android:268caf135bc68c3aae9be2",
         "android_client_info": {
-          "package_name": "com.galaxyone.pnvn.app"
+          "package_name": "com.gobranding.hstsv.uat"
         }
       },
       "oauth_client": [
         {
-          "client_id": "993432471673-25s90s8t2e0eal2ift0e1m0mgot7b7dt.apps.googleusercontent.com",
+          "client_id": "734707115975-tlkbomhn0es9pq0rdvuh0rlh19lp7eac.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBY5PScsqNeYlC75H168kODkvXYNe5Y0Uw"
+          "current_key": "AIzaSyBrlZuYkz4wgqJbbqSfi1zj3Gu7oPualgQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "993432471673-25s90s8t2e0eal2ift0e1m0mgot7b7dt.apps.googleusercontent.com",
+              "client_id": "734707115975-tlkbomhn0es9pq0rdvuh0rlh19lp7eac.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "993432471673-llr7ucc2c91rbv5r8aatlv5bbm27mc2t.apps.googleusercontent.com",
+              "client_id": "734707115975-5cg9brvrp548r5jcbqojc3o720em7a31.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.galaxyone.pnvn.app"
+                "bundle_id": "com.gobranding.hstsv.uat"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:734707115975:android:df70f0a99dfbaed3ae9be2",
+        "android_client_info": {
+          "package_name": "one.galaxy.svvn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "734707115975-tlkbomhn0es9pq0rdvuh0rlh19lp7eac.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrlZuYkz4wgqJbbqSfi1zj3Gu7oPualgQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "734707115975-tlkbomhn0es9pq0rdvuh0rlh19lp7eac.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "734707115975-5cg9brvrp548r5jcbqojc3o720em7a31.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gobranding.hstsv.uat"
               }
             }
           ]

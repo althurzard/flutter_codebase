@@ -137,7 +137,8 @@ class SingleTextField extends FormBuilderField<String> {
     AutovalidateMode autovalidateMode = AutovalidateMode.disabled,
     VoidCallback? onReset,
     FocusNode? focusNode,
-    Widget? icon,
+    Widget? rightIcon,
+    Widget? leftIcon,
     this.maxLines = 1,
     this.obscureText = false,
     this.textCapitalization = TextCapitalization.none,
@@ -159,7 +160,7 @@ class SingleTextField extends FormBuilderField<String> {
     this.onSubmitted,
     this.inputFormatters,
     this.cursorRadius,
-    this.cursorColor = Colors.black,
+    this.cursorColor,
     this.keyboardAppearance,
     this.buildCounter,
     this.expands = false,
@@ -218,82 +219,93 @@ class SingleTextField extends FormBuilderField<String> {
             //print(hasFocus);
             // Customized here
             const dimension = 8.0;
-            return GestureDetector(
-              onTap: () {
-                state.effectiveFocusNode?.requestFocus();
-              },
-              child: FormContainer(
-                enabled: enabled,
-                borderRadius: dimension,
-                isRequired: isRequired,
-                errorText: state.errorText,
-                title: title ?? '',
-                hasError: hasError,
-                hasFocus: hasFocus,
-                icon: icon,
-                child: TextField(
-                  controller: state._effectiveController,
-                  focusNode: state.effectiveFocusNode,
-                  decoration: decoration.copyWith(
+            return FormContainer(
+              enabled: enabled,
+              borderRadius: dimension,
+              isRequired: isRequired,
+              errorText: state.errorText,
+              title: title ?? '',
+              hasError: hasError,
+              hasFocus: hasFocus,
+              rightIcon: rightIcon,
+              leftIcon: leftIcon,
+              child: TextField(
+                controller: state._effectiveController,
+                focusNode: state.effectiveFocusNode,
+                decoration: decoration.copyWith(
                     contentPadding: decoration.contentPadding ??
-                        const EdgeInsets.symmetric(vertical: 0),
-                    border: InputBorder.none,
+                        const EdgeInsets.symmetric(
+                            vertical: 8.5, horizontal: 3),
+                    suffixIcon: hasFocus && (state.value?.isNotEmpty ?? false)
+                        ? IconButton(
+                            onPressed: () {
+                              state._controller?.clear();
+                            },
+                            icon: const Icon(
+                              Icons.cancel,
+                              color: Colors.grey,
+                            ),
+                          )
+                        : null,
                     isDense: true,
                     enabledBorder: InputBorder.none,
                     errorBorder: InputBorder.none,
-                    hintText: placeholder ?? '',
+                    border: InputBorder.none,
                     hintStyle: decoration.hintStyle,
                     suffixText: subfixText,
                     counterText: '',
                     fillColor: Colors.red,
-                  ),
-                  keyboardType: keyboardType,
-                  textInputAction: textInputAction,
-                  style: style ??
-                      const TextStyle(
-                          fontSize: AppSizes.textFieldSize,
-                          fontWeight: FontWeight.normal,
-                          color: AppColors.kTextColor),
-                  strutStyle: strutStyle,
-                  textAlign: textAlign,
-                  textAlignVertical: textAlignVertical,
-                  textDirection: textDirection,
-                  textCapitalization: textCapitalization,
-                  autofocus: autofocus,
-                  readOnly: readOnly,
-                  showCursor: showCursor,
-                  obscureText: obscureText,
-                  autocorrect: autocorrect,
-                  enableSuggestions: enableSuggestions,
-                  maxLengthEnforcement: maxLengthEnforcement,
-                  maxLines: maxLines,
-                  minLines: minLines,
-                  expands: expands,
-                  maxLength: maxLength,
-                  onTap: onTap,
-                  onEditingComplete: onEditingComplete,
-                  onSubmitted: onSubmitted,
-                  inputFormatters: inputFormatters,
-                  enabled: state.enabled,
-                  cursorWidth: cursorWidth,
-                  cursorRadius: cursorRadius,
-                  cursorColor: cursorColor,
-                  scrollPadding: scrollPadding,
-                  keyboardAppearance: keyboardAppearance,
-                  enableInteractiveSelection: enableInteractiveSelection,
-                  buildCounter: buildCounter,
-                  dragStartBehavior: dragStartBehavior,
-                  scrollController: scrollController,
-                  scrollPhysics: scrollPhysics,
-                  selectionHeightStyle: selectionHeightStyle,
-                  selectionWidthStyle: selectionWidthStyle,
-                  smartDashesType: smartDashesType,
-                  smartQuotesType: smartQuotesType,
-                  toolbarOptions: toolbarOptions,
-                  mouseCursor: mouseCursor,
-                  obscuringCharacter: obscuringCharacter,
-                  autofillHints: autofillHints,
-                ),
+                    labelText: placeholder ?? '',
+                    labelStyle: const TextStyle(
+                        fontSize: AppSizes.textFieldSize,
+                        fontWeight: FontWeight.normal,
+                        color: AppColors.neutral100)),
+                keyboardType: keyboardType,
+                textInputAction: textInputAction,
+                style: style ??
+                    const TextStyle(
+                        fontSize: AppSizes.textFieldSize,
+                        fontWeight: FontWeight.normal,
+                        color: AppColors.kTextColor),
+                strutStyle: strutStyle,
+                textAlign: textAlign,
+                textAlignVertical: textAlignVertical,
+                textDirection: textDirection,
+                textCapitalization: textCapitalization,
+                autofocus: autofocus,
+                readOnly: readOnly,
+                showCursor: showCursor,
+                obscureText: obscureText,
+                autocorrect: autocorrect,
+                enableSuggestions: enableSuggestions,
+                maxLengthEnforcement: maxLengthEnforcement,
+                maxLines: maxLines,
+                minLines: minLines,
+                expands: expands,
+                maxLength: maxLength,
+                onTap: onTap,
+                onEditingComplete: onEditingComplete,
+                onSubmitted: onSubmitted,
+                inputFormatters: inputFormatters,
+                enabled: state.enabled,
+                cursorWidth: cursorWidth,
+                cursorRadius: cursorRadius,
+                cursorColor: cursorColor,
+                scrollPadding: scrollPadding,
+                keyboardAppearance: keyboardAppearance,
+                enableInteractiveSelection: enableInteractiveSelection,
+                buildCounter: buildCounter,
+                dragStartBehavior: dragStartBehavior,
+                scrollController: scrollController,
+                scrollPhysics: scrollPhysics,
+                selectionHeightStyle: selectionHeightStyle,
+                selectionWidthStyle: selectionWidthStyle,
+                smartDashesType: smartDashesType,
+                smartQuotesType: smartQuotesType,
+                toolbarOptions: toolbarOptions,
+                mouseCursor: mouseCursor,
+                obscuringCharacter: obscuringCharacter,
+                autofillHints: autofillHints,
               ),
             );
           },
@@ -359,7 +371,6 @@ class _SingleTextFieldState
     if (_effectiveController!.text != value) {
       _effectiveController!.text = value!;
     }
-    validate();
   }
 
   void _handleControllerChanged() {

@@ -273,7 +273,7 @@ class DropdownField<T> extends FormBuilderField<T> {
               hasError: hasError,
               hasFocus: hasFocus,
               enabled: items.isNotEmpty,
-              icon: Container(
+              rightIcon: Container(
                 height: 40,
                 width: 40,
                 margin: const EdgeInsets.only(left: 10),
@@ -286,50 +286,60 @@ class DropdownField<T> extends FormBuilderField<T> {
                     splashColor: Colors.transparent,
                     icon: SvgPicture.asset(Ic.arrowDown)),
               ),
-              child: Container(
-                padding: const EdgeInsets.all(0),
-                child: DropdownButtonHideUnderline(
-                  child: field.value.toString().isEmpty
-                      ? Container(
-                          height: 20,
-                        )
-                      : DropdownButton<T>(
-                          key: dropdownKey,
-                          isExpanded: isExpanded,
-                          hint: hint,
-                          items: items,
-                          value: field.value,
-                          style: const TextStyle(
-                              fontSize: AppSizes.textFieldSize,
-                              fontWeight: FontWeight.normal,
-                              color: AppColors.kTextColor),
-                          isDense: isDense,
-                          disabledHint: field.value != null
-                              ? (items
-                                      .firstWhereOrNull(
-                                          (val) => val.value == field.value)
-                                      ?.child ??
-                                  Text(field.value.toString()))
-                              : disabledHint,
-                          elevation: elevation,
-                          iconSize: iconSize,
-                          icon: const Visibility(
-                              visible: false,
-                              child: Icon(Icons.arrow_downward)),
-                          iconDisabledColor: iconDisabledColor,
-                          iconEnabledColor: iconEnabledColor,
-                          onChanged: state.enabled
-                              ? (value) => changeValue(value)
-                              : null,
-                          onTap: onTap,
-                          focusNode: state.effectiveFocusNode,
-                          autofocus: autofocus,
-                          dropdownColor: dropdownColor,
-                          focusColor: focusColor,
-                          itemHeight: itemHeight,
-                          selectedItemBuilder: selectedItemBuilder,
-                        ),
-                ),
+              child: DropdownButtonHideUnderline(
+                child: field.value.toString().isEmpty
+                    ? Container(
+                        height: 20,
+                      )
+                    : DropdownButtonFormField<T>(
+                        validator: validator,
+                        autovalidateMode: autovalidateMode,
+                        decoration: decoration.copyWith(
+                            isDense: true,
+                            contentPadding: decoration.contentPadding ??
+                                const EdgeInsets.symmetric(
+                                    vertical: 8.5, horizontal: 3),
+                            enabledBorder: InputBorder.none,
+                            errorBorder: InputBorder.none,
+                            border: InputBorder.none,
+                            labelStyle: const TextStyle(
+                                fontSize: AppSizes.textFieldSize,
+                                fontWeight: FontWeight.normal,
+                                color: AppColors.neutral100)),
+                        key: dropdownKey,
+                        isExpanded: isExpanded,
+                        hint: hint,
+                        items: items,
+                        value: field.value,
+                        style: const TextStyle(
+                            fontSize: AppSizes.textFieldSize,
+                            fontWeight: FontWeight.normal,
+                            color: AppColors.kTextColor),
+                        isDense: isDense,
+                        disabledHint: field.value != null
+                            ? (items
+                                    .firstWhereOrNull(
+                                        (val) => val.value == field.value)
+                                    ?.child ??
+                                Text(field.value.toString()))
+                            : disabledHint,
+                        elevation: elevation,
+                        iconSize: iconSize,
+                        icon: const Visibility(
+                            visible: false, child: Icon(Icons.arrow_downward)),
+                        iconDisabledColor: iconDisabledColor,
+                        iconEnabledColor: iconEnabledColor,
+                        onChanged: state.enabled
+                            ? (value) => changeValue(value)
+                            : null,
+                        onTap: onTap,
+                        focusNode: state.effectiveFocusNode,
+                        autofocus: autofocus,
+                        dropdownColor: dropdownColor,
+                        focusColor: focusColor,
+                        itemHeight: itemHeight,
+                        selectedItemBuilder: selectedItemBuilder,
+                      ),
               ),
             );
           },
@@ -340,4 +350,13 @@ class DropdownField<T> extends FormBuilderField<T> {
 }
 
 class _DropdownFieldState<T>
-    extends FormBuilderFieldState<DropdownField<T>, T> {}
+    extends FormBuilderFieldState<DropdownField<T>, T> {
+  @override
+  bool validate({bool clearCustomError = true}) {
+    // TODO: implement validate
+
+    var value = super.validate(clearCustomError: clearCustomError);
+
+    return value;
+  }
+}

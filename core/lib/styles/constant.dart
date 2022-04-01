@@ -4,7 +4,7 @@ class AppConsts {
   static const pageSize = 20;
   static const defaultFont = 'GoogleSans';
   static const padding = 16.0;
-  static const buttonHeight = 54.0;
+  static const buttonHeight = 48.0;
 
   /// This is the common border radious of all the containers in the app.
   static const kStandardBorder = BorderRadius.all(Radius.circular(8));
@@ -45,6 +45,9 @@ class AppConsts {
       blurRadius: 10,
       color: Colors.black.withOpacity(.10),
       offset: const Offset(0, 2));
+  static const spacingH24 = SizedBox(
+    height: 24,
+  );
   static const spacingH16 = SizedBox(
     height: padding,
   );

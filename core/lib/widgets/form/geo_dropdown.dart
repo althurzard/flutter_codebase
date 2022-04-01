@@ -37,9 +37,10 @@ class _GeoDropdownState<T> extends State<GeoDropdown<T>> {
     return Stack(
       children: [
         IgnorePointer(
-          child: DropdownField(
+          child: DropdownField<T>(
             initialValue: widget.initialValue,
-            title: widget.label,
+            decoration: InputDecoration(
+                labelText: widget.label, hintText: widget.label),
             name: widget.name,
             isRequired: widget.isRequired,
             hint: widget.placeholder != null
@@ -55,7 +56,9 @@ class _GeoDropdownState<T> extends State<GeoDropdown<T>> {
                       child: Text(e.text),
                     ))
                 .toList(),
-            validator: widget.isRequired ? Validator.required(context) : null,
+            validator: widget.isRequired
+                ? Validator.required(context)
+                : (value) => null,
           ),
         ),
         Positioned.fill(
@@ -63,6 +66,8 @@ class _GeoDropdownState<T> extends State<GeoDropdown<T>> {
                 onTap: () async {
                   if (widget.items.isNotEmpty) {
                     var item = await GeoBottomSheet.show<T>(context,
+                        initialValue: widget
+                            .formKey?.currentState?.fields[widget.name]?.value,
                         items: widget.items,
                         title: widget.dropdownTitle,
                         showSearchBar: widget.showSearchBar);

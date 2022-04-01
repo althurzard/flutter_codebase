@@ -1,16 +1,19 @@
+import 'package:core/configs/flavor.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_cpnetworking_service/flutter_cpnetworking_service.dart';
 import 'package:core/core.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'dart:io';
 import 'package:localization_bloc/localization_bloc.dart' as localization_bloc;
+import 'package:authentication_bloc/authentication_bloc.dart'
+    as authentication_bloc;
 
 Future<void> initDIApplication() async {
   HttpOverrides.global = MyHttpOverrides();
   buildCoreDI();
-  // Listener Authenication
-  Loader.appLoader.hasAuthenication.addListener(() async =>
-      _authenicationListener(Loader.appLoader.hasAuthenication.value));
+  // Listener Authentication
+  Loader.appLoader.hasAuthentication.addListener(() async =>
+      _authenticationListener(Loader.appLoader.hasAuthentication.value));
 
   var storageTokenProcessor = await DefaultStorageTokenProcessor.create();
 
@@ -25,7 +28,7 @@ Future<void> initDIApplication() async {
   var appDomain = DefaultNetworkConfigurable(
     interceptor: InterceptorsWrapper(
         onRequest: _onRequest, onError: _onError, onResponse: _onResponse),
-    baseURL: Env.appDomain,
+    baseURL: FlavorConfig.configs.baseUrl,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -45,6 +48,9 @@ Future<void> initDIApplication() async {
   }
 
   localization_bloc.buildDI();
+  authentication_bloc.buildDI(
+      storageTokenProcessor: storageTokenProcessor,
+      networkConfigurable: appDomain);
 
   getIt.registerLazySingleton<PersistentTabController>(
       () => PersistentTabController(initialIndex: 0));
@@ -74,7 +80,7 @@ Future<void> _logout() async {
   await getIt.get<DefaultStorageTokenProcessor>().removeAllSessionInfos();
 }
 
-void _authenicationListener(bool hasLogin) async {
+void _authenticationListener(bool hasLogin) async {
   if (hasLogin == false) {
     await _logout();
   }

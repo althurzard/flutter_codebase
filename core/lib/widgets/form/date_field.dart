@@ -171,7 +171,7 @@ class DateTimeField extends FormBuilderField<DateTime> {
               title: title ?? '',
               hasError: hasError,
               hasFocus: hasFocus,
-              icon: Container(
+              rightIcon: Container(
                 height: 40,
                 width: 40,
                 margin: const EdgeInsets.only(left: 10),

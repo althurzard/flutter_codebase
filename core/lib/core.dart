@@ -2,7 +2,6 @@ library core;
 
 // Router
 export 'router/deeplink_constant.dart';
-export 'router/navigation_service.dart';
 // Di
 export 'di/di_components.dart';
 // Helper
@@ -14,9 +13,6 @@ export 'helper/formatters/date_formatter.dart';
 export 'helper/loader.dart';
 export 'helper/data_mapper.dart';
 export 'package:core/helper/observer_manager.dart';
-
-// Enviroments - API Domain
-export 'configs/env.dart';
 
 // Styles
 

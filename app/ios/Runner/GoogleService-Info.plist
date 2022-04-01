@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>993432471673-llr7ucc2c91rbv5r8aatlv5bbm27mc2t.apps.googleusercontent.com</string>
+	<string>734707115975-l60139kvii1scv8mjq890i1bicqdhrpv.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.993432471673-llr7ucc2c91rbv5r8aatlv5bbm27mc2t</string>
+	<string>com.googleusercontent.apps.734707115975-l60139kvii1scv8mjq890i1bicqdhrpv</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAeYR_y5M4z7keFsHaup_eSuiZy3OF5rWg</string>
+	<string>AIzaSyC0IkCpmEjQfjtqeeylrpcUaZAIaWYhr_0</string>
 	<key>GCM_SENDER_ID</key>
-	<string>993432471673</string>
+	<string>734707115975</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.galaxyone.pnvn.app</string>
+	<string>one.galaxy.svvn</string>
 	<key>PROJECT_ID</key>
-	<string>pnvn-7f907</string>
+	<string>svvn-push-notification</string>
 	<key>STORAGE_BUCKET</key>
-	<string>pnvn-7f907.appspot.com</string>
+	<string>svvn-push-notification.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:993432471673:ios:408165d657f5d96344aca8</string>
+	<string>1:734707115975:ios:1282e7b69c353ed9ae9be2</string>
 </dict>
 </plist>

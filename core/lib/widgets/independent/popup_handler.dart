@@ -1,5 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../core.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 
@@ -13,13 +14,15 @@ class Popup {
       flushbarPosition: FlushbarPosition.TOP,
       messageText: Text(
         message ?? '',
-        style: CoreAppTheme.of(context).textTheme.bodyText2?.copyWith(
-            fontWeight: FontWeight.normal, color: AppColors.errorText),
+        style: CoreAppTheme.of(context)
+            .textTheme
+            .bodyText2
+            ?.copyWith(fontWeight: FontWeight.normal, color: AppColors.error),
       ),
-      backgroundColor: AppColors.errorBg,
+      backgroundColor: AppColors.errorLight,
       boxShadows: [
         BoxShadow(
-          color: AppColors.errorBg.withAlpha(100),
+          color: AppColors.errorLight.withAlpha(100),
           offset: const Offset(0.0, 2.0),
           blurRadius: 3.0,
         )
@@ -36,13 +39,15 @@ class Popup {
       flushbarPosition: FlushbarPosition.BOTTOM,
       messageText: Text(
         message ?? '',
-        style: CoreAppTheme.of(context).textTheme.bodyText2?.copyWith(
-            fontWeight: FontWeight.normal, color: AppColors.successText),
+        style: CoreAppTheme.of(context)
+            .textTheme
+            .bodyText2
+            ?.copyWith(fontWeight: FontWeight.normal, color: AppColors.success),
       ),
-      backgroundColor: AppColors.successBg,
+      backgroundColor: AppColors.successLight,
       boxShadows: [
         BoxShadow(
-          color: AppColors.successBg.withAlpha(100),
+          color: AppColors.successLight.withAlpha(100),
           offset: const Offset(0.0, 2.0),
           blurRadius: 3.0,
         )
@@ -59,13 +64,15 @@ class Popup {
       flushbarPosition: FlushbarPosition.BOTTOM,
       messageText: Text(
         message ?? '',
-        style: CoreAppTheme.of(context).textTheme.bodyText2?.copyWith(
-            fontWeight: FontWeight.normal, color: AppColors.successText),
+        style: CoreAppTheme.of(context)
+            .textTheme
+            .bodyText2
+            ?.copyWith(fontWeight: FontWeight.normal, color: AppColors.success),
       ),
-      backgroundColor: AppColors.successBg,
+      backgroundColor: AppColors.successLight,
       boxShadows: [
         BoxShadow(
-          color: AppColors.successBg.withAlpha(100),
+          color: AppColors.successLight.withAlpha(100),
           offset: const Offset(0.0, 2.0),
           blurRadius: 3.0,
         )
@@ -82,13 +89,15 @@ class Popup {
       flushbarPosition: FlushbarPosition.TOP,
       messageText: Text(
         message ?? '',
-        style: CoreAppTheme.of(context).textTheme.bodyText2?.copyWith(
-            fontWeight: FontWeight.normal, color: AppColors.informationText),
+        style: CoreAppTheme.of(context)
+            .textTheme
+            .bodyText2
+            ?.copyWith(fontWeight: FontWeight.normal, color: AppColors.info),
       ),
-      backgroundColor: AppColors.informationBg,
+      backgroundColor: AppColors.informationLight,
       boxShadows: [
         BoxShadow(
-          color: AppColors.informationBg.withAlpha(100),
+          color: AppColors.informationLight.withAlpha(100),
           offset: const Offset(0.0, 2.0),
           blurRadius: 3.0,
         )
@@ -104,7 +113,7 @@ class Popup {
       BorderRadiusGeometry? borderRadius,
       bool? useRootNavigator}) {
     var dialog = AwesomeDialog(
-      context: getIt.get<NavigationService>().navigatorKey.currentContext!,
+      context: Get.context!,
       useRootNavigator: useRootNavigator ?? true,
       padding: EdgeInsets.zero,
       margin: margin,

@@ -8,15 +8,14 @@ part 'localization_event.dart';
 
 class LocalizationBloc extends Bloc<LocalizationEvent, LocalizationState> {
   LocalizationBloc({Language language = Language.en})
-      : super(LocalizationState(langauge: language));
-
-  @override
-  Stream<LocalizationState> mapEventToState(LocalizationEvent event) async* {
-    if (event is SwitchLanguageEvent) {
-      yield LocalizationState(langauge: event.language);
+      : super(LocalizationState(langauge: language)) {
+    on<SwitchLanguageEvent>((event, emit) async {
+      var language = event.language ??
+          (state.langauge == Language.vi ? Language.en : Language.vi);
+      emit(LocalizationState(langauge: language));
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setInt('language', event.language.index);
-    }
+      await prefs.setInt('language', language.index);
+    });
   }
 
   static Future<Language> getLanguage() async {

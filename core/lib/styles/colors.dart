@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class AppColors {
@@ -18,21 +16,26 @@ class AppColors {
   static const neutral70 = Color(0xFF6260A9);
   static const neutral80 = Color(0xFF4C4C8A);
   static const neltral90 = Color(0xFF3A3A69);
-  static const neutral100 = Color(0xFF6E6E73);
+  static const neutral100 = Color(0xFF808686);
   static const neutral600 = Color(0xFFF8F8F8);
-  static const primary = Color(0xFF019ECC);
-  static const primary100 = Color(0xFF019ECC);
+  static const primary = Color(0xFF006765);
+  static const primary100 = Color(0xFF006765);
+  static const primary200 = Color(0xFF00A5A1);
+  static const primary250 = Color(0xFF26C8C5);
+  static const primary400 = Color(0xFFA7E8EB);
+  static const secondary = Color(0xFFDC1F36);
+  static const secondary2 = Color(0xFFFFBDAE);
   static const accent = Color(0xFFD9F1F8);
   static const screenBg = Color(0xFFF6F6F7);
   // Toast Message Dialog
-  static const successBg = Color(0xFFEFFAF1); // Light Green
-  static const successText = Color(0xFF4BC15E); // Green
-  static const errorBg = Color(0xFFFCE8E7); // Light Red
-  static const errorText = Color(0xFFE53832); // Red
-  static const warningBg = Color(0xFFFEF5E7); // Light yellow
-  static const warningText = Color(0xFFF9B853); // Yellow
-  static const informationBg = Color(0xFFF3F9FF); // Light blue
-  static const informationText = Color(0xFF1890FF); // Blue
+  static const successLight = Color(0xFFEFFAF1); // Light Green
+  static const success = Color(0xFF4BC15E);
+  static const errorLight = Color(0xFFFCE8E7); // Light Red
+  static const error = Color(0xFFE53832);
+  static const warningLight = Color(0xFFFEF5E7); // Light yellow
+  static const warning = Color(0xFFF9B853);
+  static const informationLight = Color(0xFFF3F9FF); // Light blue
+  static const info = Color(0xFF1890FF);
   static const riskHighText = Color(0xFFFF7527);
   // Others
   static const black = Color(0xFF222222);
@@ -42,7 +45,6 @@ class AppColors {
   static const background = Color(0xFFE5E5E5);
   static const backgroundLight = Color(0xFFF9F9F9);
   static const transparent = Color(0x00000000);
-  static const success = Color(0xFF2AA952);
   static const green = Color(0xFF00C57D);
   static const purple = Color(0xFFEC1F69);
   static const violet = Color(0xFF8A48D7);
@@ -88,22 +90,22 @@ class AppColors {
   static const emptyNewsColor = Color(0xFFF6F6F7);
   static const colorTitleNews = Color(0xFF1D1D1F);
   static const colorCategoryNews = Color(0xFF86868B);
-  static const neutral200 = Color(0xFF86868B);
-  static const neutral400 = Color(0xFFD5D5D7);
-  static const neutral500 = Color(0xFFF4F4F4);
-  static const neutral300 = Color(0xFFB6B6B9);
+  static const neutral200 = Color(0xFFAAB3B3);
+  static const neutral400 = Color(0xFFEEF0F0);
+  static const neutral500 = Color(0xFFF9F9F9);
+  static const neutral300 = Color(0xFFD5D9D9);
 
   // text styles
-  static const MaterialColor primarySwatch = MaterialColor(0xFFEB1E68, {
-    100: Color.fromRGBO(235, 30, 104, .2),
-    200: Color.fromRGBO(235, 30, 104, .3),
-    300: Color.fromRGBO(235, 30, 104, .4),
-    400: Color.fromRGBO(235, 30, 104, .5),
-    500: Color.fromRGBO(235, 30, 104, .6),
-    600: Color.fromRGBO(235, 30, 104, .7),
-    700: Color.fromRGBO(235, 30, 104, .8),
-    800: Color.fromRGBO(235, 30, 104, .9),
-    900: Color.fromRGBO(235, 30, 104, 1),
+  static const MaterialColor primarySwatch = MaterialColor(0xFF006765, {
+    100: Color.fromRGBO(0, 103, 101, .2),
+    200: Color.fromRGBO(0, 103, 101, .3),
+    300: Color.fromRGBO(0, 103, 101, .4),
+    400: Color.fromRGBO(0, 103, 101, .5),
+    500: Color.fromRGBO(0, 103, 101, .6),
+    600: Color.fromRGBO(0, 103, 101, .7),
+    700: Color.fromRGBO(0, 103, 101, .8),
+    800: Color.fromRGBO(0, 103, 101, .9),
+    900: Color.fromRGBO(0, 103, 101, 1),
   });
 
   static const MaterialColor accentSwatch = MaterialColor(0xFFFC6D05, {

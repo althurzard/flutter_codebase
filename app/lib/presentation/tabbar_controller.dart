@@ -7,58 +7,52 @@ import '../generated_images.dart';
 import 'components/custom_tabbar.dart';
 import 'package:core/core.dart';
 import 'package:core/l10n/generated/l10n.dart';
+import 'components/localization_widget.dart';
 
-class TabbarController extends StatefulWidget {
+class TabbarController extends StatelessWidget {
   const TabbarController({Key? key}) : super(key: key);
 
   @override
-  _TabbarControllerState createState() => _TabbarControllerState();
-}
-
-class _TabbarControllerState extends State<TabbarController> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    var items = _navBarsItems();
     var controller = getIt.get<PersistentTabController>();
-    return PersistentTabView.custom(
-      context,
-      controller: controller,
-      itemCount: items
-          .length, // This is required in case of custom style! Pass the number of items for the nav bar.
-      screens: _buildScreens(),
-      confineInSafeArea: true,
-      handleAndroidBackButtonPress: true,
-      resizeToAvoidBottomInset:
-          true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
-      hideNavigationBarWhenKeyboardShows: true,
-      customWidget: CustomTabbar(
-        confineToSafeArea: false,
-        navBarDecoration: const NavBarDecoration(
-            colorBehindNavBar: Colors.white,
-            borderRadius: BorderRadius.horizontal()),
-        navBarEssentials: NavBarEssentials(
-            backgroundColor: Colors.white,
-            selectedScreenBuildContext: context,
-            navBarHeight: 64,
-            selectedIndex: controller.index,
-            items: items,
-            onItemSelected: (index) {
-              controller.jumpToTab(index);
-            }),
-      ),
-    );
+    return LocalizationWidget(builder: (context, state) {
+      var items = _navBarsItems(context);
+      return PersistentTabView.custom(
+        context,
+        controller: controller,
+        itemCount: items
+            .length, // This is required in case of custom style! Pass the number of items for the nav bar.
+        screens: _buildScreens(),
+        confineInSafeArea: true,
+        handleAndroidBackButtonPress: true,
+        resizeToAvoidBottomInset:
+            true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
+        hideNavigationBarWhenKeyboardShows: true,
+        customWidget: CustomTabbar(
+          confineToSafeArea: false,
+          navBarDecoration: const NavBarDecoration(
+              colorBehindNavBar: Colors.white,
+              borderRadius: BorderRadius.horizontal()),
+          navBarEssentials: NavBarEssentials(
+              backgroundColor: Colors.white,
+              selectedScreenBuildContext: context,
+              navBarHeight: 64,
+              selectedIndex: controller.index,
+              items: _navBarsItems(context),
+              onItemSelected: (index) {
+                controller.jumpToTab(index);
+              }),
+        ),
+      );
+    });
   }
 
   List<Widget> _buildScreens() {
-    return [const Home(), Container(), Container(), Container()];
+    // ignore: prefer_const_constructors
+    return [Home(), Container(), Container(), Container()];
   }
 
-  List<PersistentBottomNavBarItem> _navBarsItems() {
+  List<PersistentBottomNavBarItem> _navBarsItems(BuildContext context) {
     const textStyle = TextStyle(fontSize: 12, fontWeight: FontWeight.w400);
     return [
       PersistentBottomNavBarItem(
@@ -114,21 +108,7 @@ class _TabbarControllerState extends State<TabbarController> {
     ];
   }
 
-  void showMenuBottomSheet(BuildContext context) async {
-    var qrcode = await getIt
-        .get<NavigationService>()
-        .goTo(deeplink: DeeplinkConstant.qrCameraScreen);
-    if (qrcode is String) {
-      var data = qrcode.split('|');
-      if (data.isNotEmpty && data[0] == 'people' || data[0] == 'patient') {
-        await getIt
-            .get<NavigationService>()
-            .goTo(deeplink: DeeplinkConstant.addPatients, arguments: data);
-      } else {
-        Popup.showError(context, message: 'Mã QRCode không đúng định dạng.');
-      }
-    }
-  }
+  void showMenuBottomSheet(BuildContext context) async {}
 }
 
 class Home extends StatelessWidget {
@@ -136,19 +116,19 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        ButtonContainer(
-          text: Text(S.of(context).submit_btn),
-          press: () {
-            var language = context.read<LocalizationBloc>().state.langauge;
-            context.read<LocalizationBloc>().add(SwitchLanguageEvent(
-                language: language == Language.vi ? Language.en : Language.vi));
-          },
-        )
-      ],
+    return Scaffold(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ButtonContainer(
+            textString: S.of(context).submit_btn,
+            press: () {
+              context.read<LocalizationBloc>().add(SwitchLanguageEvent());
+            },
+          )
+        ],
+      ),
     );
   }
 }

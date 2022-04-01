@@ -17,10 +17,13 @@ class CoreAppTheme {
         primarySwatch: AppColors.primarySwatch,
         primaryColorDark: AppColors.primary,
         backgroundColor: AppColors.white,
-        errorColor: AppColors.red,
+        errorColor: AppColors.error,
         brightness: Brightness.light);
     return ThemeData(
-      accentColor: AppColors.accent,
+      textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: AppColors.primary,
+          selectionColor: AppColors.primary400,
+          selectionHandleColor: AppColors.primary200),
       inputDecorationTheme: Theme.of(context)
           .inputDecorationTheme
           .copyWith(labelStyle: const TextStyle(color: AppColors.midGrey)),

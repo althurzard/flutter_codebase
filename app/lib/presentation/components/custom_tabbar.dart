@@ -107,6 +107,7 @@ class _CustomTabbarState extends State<CustomTabbar> {
           );
   }
 
+  // ignore: unused_element
   Widget _buildMiddleItem(
       PersistentBottomNavBarItem item, bool isSelected, double? height) {
     return widget.navBarEssentials!.navBarHeight == 0

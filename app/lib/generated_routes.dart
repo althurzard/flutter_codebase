@@ -1,8 +1,7 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:localization_bloc/localization_bloc.dart';
 import 'presentation/tabbar_controller.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'presentation/waiting_sync_screen.dart';
 
 Route<dynamic> generatedRoutes(RouteSettings routeSettings) {
   switch (routeSettings.name) {
@@ -12,15 +11,9 @@ Route<dynamic> generatedRoutes(RouteSettings routeSettings) {
           settings: routeSettings);
     default:
       return MaterialPageRoute(
-          builder: (context) => const TabbarController(),
+          builder: (context) => const WaitingSyncScreen(),
           settings: routeSettings);
   }
-}
-
-Widget _localizationWidget(Widget child) {
-  return BlocBuilder<LocalizationBloc, LocalizationState>(
-      buildWhen: (previous, current) => previous.langauge != current.langauge,
-      builder: (context, state) => child);
 }
 
 class TransparentRoute extends PageRoute<void> {

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.galaxyone.pnvn.app">
+    package="one.galaxy.svvn">
    <application
-        android:label="app"
+        android:label="SVVN"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

@@ -154,7 +154,7 @@ class TextboxField extends FormBuilderField<String> {
       this.onSubmitted,
       this.inputFormatters,
       this.cursorRadius,
-      this.cursorColor = Colors.black,
+      this.cursorColor,
       this.keyboardAppearance,
       this.buildCounter,
       this.expands = false,

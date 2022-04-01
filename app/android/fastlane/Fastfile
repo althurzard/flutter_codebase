@@ -1,0 +1,111 @@
+# Update fastlane automatically
+update_fastlane
+
+SLACK_URL = "https://hooks.slack.com/services/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"
+DIAWII_API_TOKEN = "snmwb2vq9w8ku6QfiWOnfwXPUI8uWxorJ5qzA7CktS"
+SLACK_ERROR_URL = "https://hooks.slack.com/services/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"
+default_platform(:android)
+
+platform :android do
+  desc "Build android apk"
+  lane :build_android_apk do |options|
+    begin
+      version_code = flutter_version()['version_code']
+      version_name = flutter_version()['version_name']
+      sh "./flutter_test.sh"
+      sh "./flutter_build.sh --clean"
+      # Build APK
+      sh "./flutter_build.sh --apk"
+      diawi(
+        token: DIAWII_API_TOKEN,
+        file: "../build/app/outputs/flutter-apk/app-release.apk"
+      )
+      slack(
+          message: "App successfully uploaded!",
+          slack_url: SLACK_URL,
+          success: true,        # Optional, defaults to true.
+          payload: {  # Optional, lets you specify any number of your own Slack attachments.
+            "Build Date" => Time.new.to_s,
+            "Built by" => "Fastlane Android",
+          },
+          default_payloads: [:git_branch, :git_author, :last_git_commit], # Optional, lets you specify default payloads to include. Pass an empty array to suppress all the default payloads.
+          attachment_properties: { # Optional, lets you specify any other properties available for attachments in the slack API (see https://api.slack.com/docs/attachments).
+          fields: [
+            {
+              title: "Build number",
+              value: "#{version_name} (#{version_code})",
+            },
+            {
+              title: "Download app from Diawii URL",
+              value: lane_context[SharedValues::UPLOADED_FILE_LINK_TO_DIAWI],
+              short: false
+            }]
+          }
+        )
+    rescue => exception
+      on_error(exception)
+    end
+  end
+
+  desc "Deploy (Upload to play store)"
+  lane :deploy_android do |options|
+    begin
+      version_code = flutter_version()['version_code']
+      version_name = flutter_version()['version_name']
+      # Build AAB
+      sh "./flutter_build.sh"
+      upload_to_play_store(
+        track: options[:production] ? 'production' : options[:internal] ? 'internal' : options[:alpha] ? 'alpha' : 'beta',
+        aab: '../build/app/outputs/bundle/release/app-release.aab',
+        skip_upload_images: true,
+        skip_upload_screenshots: true,
+      )
+      slack(
+          message: "App successfully deployed to PlayStore!",
+          slack_url: SLACK_URL,
+          success: true,        # Optional, defaults to true.
+          payload: {  # Optional, lets you specify any number of your own Slack attachments.
+            "Build Date" => Time.new.to_s,
+            "Built by" => "Fastlane Android",
+          },
+          default_payloads: [:git_branch, :git_author], # Optional, lets you specify default payloads to include. Pass an empty array to suppress all the default payloads.
+          attachment_properties: { # Optional, lets you specify any other properties available for attachments in the slack API (see https://api.slack.com/docs/attachments).
+          fields: [
+            {
+              title: "Build number",
+              value: "#{version_name} (#{version_code})",
+            }]
+          }
+        )
+    rescue => exception
+      on_error(exception)
+    end
+  end
+end
+
+def on_error(exception)
+  version_code = flutter_version()['version_code']
+  version_name = flutter_version()['version_name']
+  slack(
+      message: "Something goes wrong",
+      success: false,
+      slack_url: SLACK_ERROR_URL,
+      payload: {  # Optional, lets you specify any number of your own Slack attachments.
+      "Build Date" => Time.new.to_s,
+      "Built by" => "Fastlane Android",
+      },
+      attachment_properties: {
+          fields: [
+              {
+                  title: "Build number",
+                  value: "#{version_name} (#{version_code})",
+              },
+              {
+                  title: "Error message",
+                  value: exception.to_s,
+                  short: false
+              }
+          ]
+      }
+  )
+end

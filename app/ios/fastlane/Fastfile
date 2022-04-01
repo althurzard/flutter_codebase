@@ -1,0 +1,85 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+SLACK_URL = "https://hooks.slack.com/services/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"
+SLACK_ERROR_URL = "https://hooks.slack.com/services/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"
+ENV[FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD] = "enbo-oiur-gzab-ixdo"
+
+default_platform(:ios)
+platform :ios do
+  desc "Push a new beta build to TestFlight"
+  lane :beta do
+      begin
+        version_code = flutter_version()['version_code']
+        version_name = flutter_version()['version_name']
+        sh "flutter clean"
+        sh "flutter pub get"
+        sh "arch -x86_64 pod install --repo-update"
+        build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
+        upload_to_testflight(skip_waiting_for_build_processing: true, apple_id: 'nguyenquocvuong.dev@gmail.com')
+        slack(
+          message: "App successfully uploaded!",
+          slack_url: SLACK_URL,
+          success: true,        # Optional, defaults to true.
+          payload: {  # Optional, lets you specify any number of your own Slack attachments.
+            "Build Date" => Time.new.to_s,
+            "Built by" => "Fastlane iOS",
+          },
+          default_payloads: [:git_branch, :git_author, :last_git_commit], # Optional, lets you specify default payloads to include. Pass an empty array to suppress all the default payloads.
+          attachment_properties: { # Optional, lets you specify any other properties available for attachments in the slack API (see https://api.slack.com/docs/attachments).
+          fields: [
+            {
+              title: "Build number",
+              value: "#{version_name} (#{version_code})",
+            },
+            {
+              title: "App is being processed by Testflight",
+              value: "A waiting time of approximately for at least 5 minutes... It will notify your email when the process is completed",
+              short: true
+            }]
+          }
+        )
+      rescue => exception
+          on_error(exception)
+      end
+  end
+end
+
+def on_error(exception)
+  version_code = flutter_version()['version_code']
+  version_name = flutter_version()['version_name']
+  slack(
+      message: "Something goes wrong",
+      success: false,
+      slack_url: SLACK_ERROR_URL,
+      payload: {  # Optional, lets you specify any number of your own Slack attachments.
+      "Build Date" => Time.new.to_s,
+      "Built by" => "Fastlane iOS",
+      },
+      attachment_properties: {
+          fields: [
+              {
+                  title: "Build number",
+                  value: "#{version_name} (#{version_code})",
+              },
+              {
+                  title: "Error message",
+                  value: exception.to_s,
+                  short: false
+              }
+          ]
+      }
+  )
+end

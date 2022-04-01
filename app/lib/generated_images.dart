@@ -22,4 +22,3 @@ class Img {
   static const test = 'assets/images/test.png';
   static const wifi = 'assets/images/wifi.png';
 }
-

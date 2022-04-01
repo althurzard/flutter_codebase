@@ -6,12 +6,15 @@ class Ic {
   static const backIco = 'packages/core/assets/icons/back_ico.svg';
   static const checkIc = 'packages/core/assets/icons/check_ic.svg';
   static const closeIc = 'packages/core/assets/icons/close_ic.svg';
+  static const searchNormal = 'packages/core/assets/icons/search_normal.svg';
+  static const tickCircle = 'packages/core/assets/icons/tick_circle.svg';
 }
 
 class Img {
   static const header = 'packages/core/assets/images/Header.png';
   static const logo = 'packages/core/assets/images/Logo.png';
   static const checkedIco = 'packages/core/assets/images/checked_ico.png';
+  static const empty = 'packages/core/assets/images/empty.png';
   static const greenNav = 'packages/core/assets/images/green_nav.png';
   static const orangeNav = 'packages/core/assets/images/orange_nav.png';
   static const radioCheckedIco = 'packages/core/assets/images/radio_checked_ico.png';

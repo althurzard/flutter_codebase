@@ -11,7 +11,10 @@ Future<void> initFirebase() async {
     fetchTimeout: const Duration(seconds: 60),
     minimumFetchInterval: const Duration(milliseconds: 2),
   ));
-  //await RemoteConfig.instance.fetchAndActivate();
+
+  try {
+    await RemoteConfig.instance.fetchAndActivate();
+  } catch (_) {}
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 

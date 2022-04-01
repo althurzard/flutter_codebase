@@ -6,7 +6,7 @@ class Loader {
   ValueNotifier<bool> loading = ValueNotifier(false);
   ValueNotifier<bool> initial = ValueNotifier(true);
   ValueNotifier<bool> lockingScreen = ValueNotifier(false);
-  ValueNotifier<bool> hasAuthenication = ValueNotifier(false);
+  ValueNotifier<bool> hasAuthentication = ValueNotifier(false);
   ValueNotifier<bool> connectionStatus = ValueNotifier(true);
   void showLoading(bool show) {
     loading.value = show;
@@ -21,7 +21,7 @@ class Loader {
   }
 
   void triggerAuth(bool auth) {
-    hasAuthenication.value = auth;
+    hasAuthentication.value = auth;
   }
 
   void setConnectionStatus(bool status) {

@@ -1,3 +1,4 @@
+import 'package:core/configs/flavor.dart';
 import 'package:core/di/di_components.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class AuthorizeImage extends StatelessWidget {
   Widget build(BuildContext context) {
     var token = getIt.get<DefaultStorageTokenProcessor>().getCurrentToken();
     return Image.network(
-      '${Env.appDomain}/bn$url',
+      '${FlavorConfig.configs.baseUrl}/bn$url',
       fit: fit,
       headers: {'Authorization': 'Bearer $token'},
     );

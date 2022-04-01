@@ -4,7 +4,8 @@ import '../../core.dart';
 
 class FormContainer extends StatelessWidget {
   final Widget child;
-  final Widget? icon;
+  final Widget? rightIcon;
+  final Widget? leftIcon;
   final bool hasFocus;
   final bool hasError;
   final double borderRadius;
@@ -16,7 +17,8 @@ class FormContainer extends StatelessWidget {
       {Key? key,
       required this.child,
       this.enabled = true,
-      this.icon,
+      this.rightIcon,
+      this.leftIcon,
       this.hasFocus = false,
       this.hasError = false,
       this.isRequired = true,
@@ -27,27 +29,49 @@ class FormContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        margin: EdgeInsets.all(hasError ? 1 : 0),
-        decoration: BoxDecoration(
-            border: Border.all(
-                color: (hasFocus
-                    ? AppColors.primary
-                    : hasError
-                        ? AppColors.red
-                        : AppColors.neutral400),
-                width: 1.0),
-            borderRadius: BorderRadius.circular(borderRadius),
-            color: enabled ? Colors.white : AppColors.black.withAlpha(7)),
-        child: FormHandlerContainer(
-          title: title,
-          formField: child,
-          isRequired: isRequired,
-          hasError: hasError,
-          errorText: errorText,
-          borderRadius: borderRadius,
-          icon: icon,
-        ));
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+            margin: EdgeInsets.all(hasError ? 1 : 0),
+            decoration: BoxDecoration(
+                border: Border.all(
+                    color: (hasFocus
+                        ? AppColors.primary
+                        : hasError
+                            ? AppColors.red
+                            : AppColors.neutral400),
+                    width: 1.0),
+                borderRadius: BorderRadius.circular(borderRadius),
+                color: enabled ? Colors.white : AppColors.black.withAlpha(7)),
+            child: FormHandlerContainer(
+              title: title,
+              formField: child,
+              isRequired: isRequired,
+              hasError: hasError,
+              errorText: errorText,
+              borderRadius: borderRadius,
+              hasFocus: hasFocus,
+              rightIcon: rightIcon,
+              leftIcon: leftIcon,
+            )),
+        if (hasError && (errorText ?? '').isNotEmpty)
+          const SizedBox(
+            height: 5,
+          ),
+        if (hasError && (errorText ?? '').isNotEmpty)
+          Container(
+              padding: const EdgeInsets.symmetric(
+                  vertical: 0, horizontal: AppConsts.padding),
+              child: Text(
+                errorText ?? '',
+                style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.normal,
+                    color: Color(0xFFDC1F36)),
+              ))
+      ],
+    );
   }
 }
 
@@ -58,7 +82,9 @@ class FormHandlerContainer extends StatelessWidget {
   final bool hasError;
   final String? errorText;
   final double borderRadius;
-  final Widget? icon;
+  final Widget? rightIcon;
+  final Widget? leftIcon;
+  final bool hasFocus;
   const FormHandlerContainer(
       {Key? key,
       this.title = '',
@@ -67,7 +93,9 @@ class FormHandlerContainer extends StatelessWidget {
       this.hasError = false,
       this.errorText,
       this.borderRadius = 12,
-      this.icon})
+      this.hasFocus = false,
+      this.rightIcon,
+      this.leftIcon})
       : super(key: key);
 
   @override
@@ -78,9 +106,10 @@ class FormHandlerContainer extends StatelessWidget {
       children: [
         Row(
           children: [
+            if (leftIcon != null) leftIcon!,
             Expanded(
               child: Container(
-                padding: const EdgeInsets.only(left: 8, right: 8, top: 8),
+                padding: EdgeInsets.only(left: 8, right: 8, top: 4),
                 child: Column(
                   children: [
                     if (title.isNotEmpty)
@@ -123,27 +152,9 @@ class FormHandlerContainer extends StatelessWidget {
                 ),
               ),
             ),
-            if (icon != null) icon!
+            if (rightIcon != null) rightIcon!
           ],
         ),
-        const SizedBox(
-          height: 5,
-        ),
-        if (hasError && (errorText ?? '').isNotEmpty)
-          Container(
-              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
-              decoration: BoxDecoration(
-                  color: AppColors.red,
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(borderRadius),
-                      bottomRight: Radius.circular(borderRadius))),
-              child: Text(
-                errorText ?? '',
-                style: const TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white),
-              ))
       ],
     );
   }
